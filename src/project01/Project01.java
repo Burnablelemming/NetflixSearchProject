@@ -81,19 +81,31 @@ public class Project01 {
         //casting showChoice to only lowercase
         String showChoice = Show.toLowerCase();
 
+        outputFile.println("Results for: tv show");
+
         int weeks = 0;
+        int ShowLocation = 0;
+        //running through each index number in the array
         for (int row = 0; row < netflixData.length; row++) {
             //making the show in the 2D array lowercase
             String showLower = netflixData[row][2].toLowerCase();
             //comparing if showchoice and show in the array equal each other
             if (showLower.equals(showChoice)) {
-                outputFile.print(netflixData[row][2]);
-                //counting number of weeks show has aired 
+                ShowLocation = row;
                 weeks++;
-
             }
         }
-        System.out.println("The number of weeks " + Show + " appeared is: " + weeks);
+        //printing out the shows location to the file
+        for (int col = 0; col < 6; col++) {
+            outputFile.print(netflixData[ShowLocation][col] + " ");
+        }
+        //if show is found through numebr of weeks write to file, else not found
+        if (weeks > 0) {
+            System.out.println("The number of weeks " + Show + " appeared is: " + weeks);
+            outputFile.close();
 
+        } else {
+            System.out.println("Show not found");
+        }
     }
 }
