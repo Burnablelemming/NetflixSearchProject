@@ -19,7 +19,9 @@ public class Project01 {
         while (input.hasNext()) {
 
         }
-        //}
+       
+        //find(input);
+        //
         System.out.println("What would you like to do.");
         System.out.println("Menu  (Choose one of the following or Q to quit:");
         System.out.println("F - Filter on Type \n" + "D -Filter on Data\n" + 
@@ -30,28 +32,31 @@ public class Project01 {
 
     }
 
-    
 //method that returns the data in a 2D array from file input
     public static String[][] find(Scanner fileInput) throws FileNotFoundException {
+        //initialize 2D Array for the File
         String[][] netflixData = new String[7100][6];
-        //Choose the input File
-        JFileChooser myChooser = new JFileChooser();
-        myChooser.showOpenDialog(null);
-        File file = myChooser.getSelectedFile();
 
-        //Create Scanner
-        Scanner input = new Scanner(file);
-        int i=0;
-        while (fileInput.hasNextLine()) {
-            String line = fileInput.nextLine();
-            String[] fields = line.split(",");
-             for(int j=0;j<6;j++){
-                 netflixData[i][j]=fields[j];
-             }
-             i++;
+        fileInput.nextLine();
+
+        //reading the file and splitting by commas
+        while (fileInput.hasNext()) {
+            //Double for loop to iterate through each index in the 2D Array
+            for (int row = 0; row < netflixData.length; row++) {
+
+                //moves the cursor to the next line for each row
+                String line = fileInput.nextLine();
+                for (int col = 0; col < netflixData[row].length; col++) {
+
+                    //splits the row line read by ","
+                    String[] fields = line.split(",");
+
+                    //assigned each index to split by ","
+                    netflixData[row][col] = fields[col];
+                }
+            }
+
         }
         return netflixData;
-        
-    }  
-    
+    }
 }
