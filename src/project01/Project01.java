@@ -1,40 +1,29 @@
-
 package project01;
 
 import java.util.*;
 import java.io.*;
 import javax.swing.*;
 
-
 public class Project01 {
+
     public static void main(String[] args) throws FileNotFoundException {
         //setting up user to choose file
         JFileChooser myChooser = new JFileChooser();
-            myChooser.showOpenDialog(null);
-            File file = myChooser.getSelectedFile();
+        myChooser.showOpenDialog(null);
+        File file = myChooser.getSelectedFile();
 
         //Create Scanner
         Scanner input = new Scanner(file);
-<<<<<<< Updated upstream
 
-        while (input.hasNext()) {
-            
-            
-
-        }
-       
-        //find(input
-       String[][] netflixData2D = find(input);
-        //
-=======
+        //find(input)
         //Storing the original file in a 2D array
         String[][] netflixData2D = find(input);
         //menu choices
->>>>>>> Stashed changes
+
         System.out.println("What would you like to do.");
-        System.out.println("Menu  (Choose one of the following or Q to quit:");
-        System.out.println("F - Filter on Type \n" + "D -Filter on Data\n" + 
-                "S -Search by show \n" + "H -Highest days in top ten");
+        System.out.println("Menu  (Choose one of the following or Q to quit):");
+        System.out.println("F - Filter on Type \n" + "D -Filter on Data\n"
+                + "S -Search by show \n" + "H -Highest days in top ten");
         input = new Scanner(System.in);
         System.out.print("Choice: ");
         String choice = input.nextLine();
@@ -56,6 +45,8 @@ public class Project01 {
                 System.out.print("What tv or movie show would you like to search for: ");
                 String show = input.nextLine();
                 searchForShow(netflixData2D, show);
+            } else if (choice.equals("H")) {
+                highestDaysInTopTen(netflixData2D);
             }
             System.out.println("Menu  (Choose one of the following or Q to quit:");
             System.out.println("F - Filter on Type \n" + "D -Filter on Data\n" + "S -Search by show \n" + "H -Highest days in top ten");
@@ -185,4 +176,24 @@ public class Project01 {
         outputFile.close();
         System.out.println();
     }
+
+    public static void highestDaysInTopTen(String[][] netflixData) {
+        int max = 0;
+        int HighestShow = 0;
+        for (int row = 0; row < netflixData.length; row++) {
+
+            int topTen = Integer.parseInt(netflixData[row][5]);
+            //comparing if showchoice and show in the array equal each other
+            if (topTen >= max) {
+                max = topTen;
+                HighestShow = row;
+
+            }
+
+        }
+
+        System.out.println("The show/movie with the highest number of consecutive days in the top ten is: " + netflixData[HighestShow][2] + " with " + netflixData[HighestShow][5] + " days!");
+        System.out.println();
+    }
+
 }
