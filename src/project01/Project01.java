@@ -15,6 +15,7 @@ public class Project01 {
 
         //Create Scanner
         Scanner input = new Scanner(file);
+<<<<<<< Updated upstream
 
         while (input.hasNext()) {
             
@@ -25,6 +26,11 @@ public class Project01 {
         //find(input
        String[][] netflixData2D = find(input);
         //
+=======
+        //Storing the original file in a 2D array
+        String[][] netflixData2D = find(input);
+        //menu choices
+>>>>>>> Stashed changes
         System.out.println("What would you like to do.");
         System.out.println("Menu  (Choose one of the following or Q to quit:");
         System.out.println("F - Filter on Type \n" + "D -Filter on Data\n" + 
@@ -35,14 +41,17 @@ public class Project01 {
 
         //Switch selection Structure
         while (!choice.equals("Q")) {
+
             if (choice.equals("F")) {
                 System.out.print("What TV Show or Movie would you like to search for: ");
                 String type = input.nextLine();
                 filterOnType(netflixData2D, type);
+
             } else if (choice.equals("D")) {
                 System.out.print("What week would you like to search for (mm/dd/yyyy): ");
                 String day = input.nextLine();
                 filterOnDate(netflixData2D, day);
+
             } else if (choice.equals("S")) {
                 System.out.print("What tv or movie show would you like to search for: ");
                 String show = input.nextLine();
@@ -103,15 +112,17 @@ public class Project01 {
             if (showLower.equals(showChoice)) {
                 ShowLocation = row;
                 weeks++;
+                for (int col = 0; col < 6; col++) {
+                    outputFile.print(netflixData[ShowLocation][col] + " ");
+                }
+                outputFile.println();
             }
         }
         //printing out the shows location to the file
-        for (int col = 0; col < 6; col++) {
-            outputFile.print(netflixData[ShowLocation][col] + " ");
-        }
         //if show is found through numebr of weeks write to file, else not found
         if (weeks > 0) {
             System.out.println("The number of weeks " + Show + " appeared is: " + weeks);
+            System.out.println("");
             outputFile.close();
 
         } else {
@@ -160,6 +171,7 @@ public class Project01 {
                 int typeLocation = row;
                 for (int col = 0; col < 6; col++) {
                     outputFile.print(netflixData[typeLocation][col] + " ");
+                    //variable to check if a show type has been found
                     ifFound++;
 
                 }
