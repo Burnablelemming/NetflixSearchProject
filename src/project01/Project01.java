@@ -38,14 +38,28 @@ public class Project01 {
         String choice = input.nextLine();
 
         //Switch selection Structure
-        switch (choice) {
-            case "S": {
+        while (!choice.equals("Q")) {
+            if (choice.equals("F")) {
+                System.out.print("What TV Show or Movie would you like to search for: ");
+                String type = input.nextLine();
+                filterOnType(netflixData2D, type);
+            } else if (choice.equals("D")) {
+                System.out.print("What week would you like to search for (mm/dd/yyyy): ");
+                String day = input.nextLine();
+                filterOnDate(netflixData2D, day);
+            } else if (choice.equals("S")) {
                 System.out.print("What tv or movie show would you like to search for: ");
                 String show = input.nextLine();
                 searchForShow(netflixData2D, show);
             }
-        }
+            System.out.println("Menu  (Choose one of the following or Q to quit:");
+            System.out.println("F - Filter on Type \n" + "D -Filter on Data\n" + "S -Search by show \n" + "H -Highest days in top ten");
+            input = new Scanner(System.in);
+            System.out.print("Choice: ");
+            choice = input.nextLine();
+            System.out.println("");
 
+        }
     }
 
 //method that returns the data in a 2D array from file input
@@ -107,5 +121,60 @@ public class Project01 {
         } else {
             System.out.println("Show not found");
         }
+    }
+
+    public static void filterOnDate(String[][] netflixData, String date) throws FileNotFoundException {
+        PrintWriter outputFile = new PrintWriter("date.txt");
+
+        outputFile.println("Results for: tv show");
+        int ifFound = 0;
+        //running through each index number in the array
+        for (int row = 0; row < netflixData.length; row++) {
+            //turning the date into a string for a boolean operator
+            String showDate = netflixData[row][0];
+            //comparing if showchoice and show in the array equal each other
+            if (date.equals(showDate)) {
+                int dateLocation = row;
+                for (int col = 0; col < 6; col++) {
+                    outputFile.print(netflixData[dateLocation][col] + " ");
+                    ifFound++;
+
+                }
+                outputFile.println();
+            }
+        }
+        if (ifFound == 0) {
+            System.out.println("Show not found");
+            System.out.println();
+        }
+        outputFile.close();
+    }
+
+    public static void filterOnType(String[][] netflixData, String type) throws FileNotFoundException {
+        PrintWriter outputFile = new PrintWriter("type.txt");
+
+        outputFile.println("Results for: tv show");
+        int ifFound = 0;
+        //running through each index number in the array
+        for (int row = 0; row < netflixData.length; row++) {
+            //turning the showType into a String for boolean operator
+            String showType = netflixData[row][3];
+            //comparing if showchoice and show in the array equal each other
+            if (type.equalsIgnoreCase(showType)) {
+                int typeLocation = row;
+                for (int col = 0; col < 6; col++) {
+                    outputFile.print(netflixData[typeLocation][col] + " ");
+                    ifFound++;
+
+                }
+                outputFile.println();
+            }
+        }
+        if (ifFound == 0) {
+            System.out.println("Show not found");
+            System.out.println();
+        }
+        outputFile.close();
+        System.out.println();
     }
 }
