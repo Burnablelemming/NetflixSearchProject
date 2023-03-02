@@ -27,6 +27,7 @@ public class Project01 {
         input = new Scanner(System.in);
         System.out.print("Choice: ");
         String choice = input.nextLine();
+        System.out.println();
 
         //Switch selection Structure
         while (!choice.equals("Q")) {
@@ -35,18 +36,22 @@ public class Project01 {
                 System.out.print("What TV Show or Movie would you like to search for: ");
                 String type = input.nextLine();
                 filterOnType(netflixData2D, type);
+                System.out.println();
 
             } else if (choice.equals("D")) {
                 System.out.print("What week would you like to search for (mm/dd/yyyy): ");
                 String day = input.nextLine();
                 filterOnDate(netflixData2D, day);
+                System.out.println();
 
             } else if (choice.equals("S")) {
                 System.out.print("What tv or movie show would you like to search for: ");
                 String show = input.nextLine();
                 searchForShow(netflixData2D, show);
+                System.out.println();
             } else if (choice.equals("H")) {
                 highestDaysInTopTen(netflixData2D);
+                System.out.println();
             }
             System.out.println("Menu  (Choose one of the following or Q to quit:");
             System.out.println("F - Filter on Type \n" + "D -Filter on Data\n" + "S -Search by show \n" + "H -Highest days in top ten");
@@ -113,9 +118,7 @@ public class Project01 {
         //if show is found through numebr of weeks write to file, else not found
         if (weeks > 0) {
             System.out.println("The number of weeks " + Show + " appeared is: " + weeks);
-            System.out.println("");
             outputFile.close();
-
         } else {
             System.out.println("Show not found");
         }
@@ -143,7 +146,6 @@ public class Project01 {
         }
         if (ifFound == 0) {
             System.out.println("Show not found");
-            System.out.println();
         }
         outputFile.close();
     }
@@ -171,10 +173,8 @@ public class Project01 {
         }
         if (ifFound == 0) {
             System.out.println("Show not found");
-            System.out.println();
         }
         outputFile.close();
-        System.out.println();
     }
 
     public static void highestDaysInTopTen(String[][] netflixData) {
@@ -193,7 +193,6 @@ public class Project01 {
         }
 
         System.out.println("The show/movie with the highest number of consecutive days in the top ten is: " + netflixData[HighestShow][2] + " with " + netflixData[HighestShow][5] + " days!");
-        System.out.println();
     }
 
 }
